@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+	<struts>
+		<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+		<constant name="struts.devMode" value="true" />
+		<constant name="struts.multipart.saveDir" value="/tmp"/>
+		<package name="com" extends="struts-default" >
+		
+			<interceptors>
+				<interceptor name="logininterceptor" class="interceptor.LoginInterceptor"></interceptor>
+			</interceptors>
+			<action name="pictrueupdown" class="action.GoodsUpdown_action">
+				<result name="success">success.jsp</result>
+				<result name="error">error.jsp</result>
+				<interceptor-ref name="fileUpload">
+					<param name="allowedTypes">image/png,image/jpeg</param>
+					<param name="maximumSize">1024000</param>
+             	</interceptor-ref> 
+             	<interceptor-ref name="defaultStack"/>
+			</action>
+			<action name="register_action" class="action.Register_Action" method="register">
+				<result name="error">/jsp/register.jsp</result>
+				<result name="success">/jsp/login.jsp</result>
+			</action>
+			<action name="login_action" class="action.Login_Action" method="login">
+				<result name="error">/jsp/login.jsp</result>
+				<result name="success">/jsp/homePage.jsp</result>
+			</action>
+		</package>
+	</struts>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-10-4 20:47:18 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Java.Goods" table="goods">
+        <id name="id" type="int">
+            <generator class="increment" />
+        </id>      
+        <property name="name" type="java.lang.String">
+        </property>
+        <property name="introduction" type="java.lang.String">
+        </property>
+        <property name="price" type="java.lang.String">
+        </property>
+        <property name="type" type="java.lang.String">
+        </property>
+        <property name="phonenumber" type="java.lang.String">
+        </property>
+        <property name="qq" type="java.lang.String">
+        </property>
+        <property name="time" type="java.lang.String">
+        </property>
+        <property name="url" type="java.lang.String">
+        </property>
+        <property name="address" type="java.lang.String">
+        </property>
+        <many-to-one name="user" class="Java.User" lazy="false" column="user_id" cascade="save-update" >
+        </many-to-one>
+    </class>
+</hibernate-mapping>

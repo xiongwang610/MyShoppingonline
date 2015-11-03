@@ -17,13 +17,25 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import DbTool.DbOperate;
+import Javabean.Goods;
 
 @SuppressWarnings("serial")
 public class GoodsUpdown_action extends ActionSupport{
 	
 	//判断是否可以存储
 	private boolean issave=true;
-	
+	private String fileContentType;
+	public String getFileContentType() {
+		return fileContentType;
+	}
+
+
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
+	}
+
+
+
 	private String fileFileName;
 	private File file;
 	private String phoneNumber;
@@ -146,12 +158,15 @@ public class GoodsUpdown_action extends ActionSupport{
 	 * 将图片存到硬盘上和将goods存到数据库
 	 * @throws IOException
 	 */
-	private String save() throws IOException{
+	private void save() throws IOException{
 		
 		String fileName = null;
 		if(file != null){
 			fileName=fileFileName.substring(fileFileName.lastIndexOf(".")); 
-			
+			if(phoneNumber == null && qq == null){
+				this.addActionError("电话号码和qq不能都为空");
+				return ; 
+			}
 			if(phoneNumber != null){
 				fileName = new Date().getTime()+phoneNumber+fileName;
 			}else fileName = new Date().getTime()+qq+fileName;
@@ -162,25 +177,19 @@ public class GoodsUpdown_action extends ActionSupport{
 			}
 			
 			FileUtils.copyFile(file, new File(image_File,fileName));
-		}
+			Goods goods = new Goods();
+			goods.setName(name);
+			goods.setAddress(introduction);
+			goods.setPhonenumber(phoneNumber);
+			goods.setPrice(price);
+			goods.setQq(qq);
+			goods.setTime(new SimpleDateFormat("yyyy-MM-dd hh-ss-dd").format(new Date().getTime()));
+			goods.setUrl(fileName);
+			goods.setType(type);
+			goods.setUser(new DbOperate().getUserByUserName("xiongwang"));
+			new DbOperate().save(goods);
+		}	
 		
-		/**DbOperate operate = new DbOperate();
-		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST); 
-		HttpSession session=request.getSession();
-		
-		User user=operate.getUserByUserName((String)session.getAttribute("username"));
-		Goods goods=new Goods();
-		goods.setIntroduction(introduction);
-		goods.setName(name);
-		goods.setAddress(address);
-		if(phoneNumber!=null)	goods.setPhonenumber(phoneNumber);
-		if(qq!=null) goods.setQq(qq);
-		goods.setPrice(price);
-		goods.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime()));
-		goods.setUrl(fileName);
-		goods.setUser(user);
-		operate.save(goods);**/
-		return null;
 		
 	}
 	
@@ -188,5 +197,6 @@ public class GoodsUpdown_action extends ActionSupport{
 	public void addFieldError(String fieldName, String errorMessage) {
 		issave=false;
 	}
+	
 	
 }

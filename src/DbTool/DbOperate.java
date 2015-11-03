@@ -7,8 +7,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import Java.Goods;
-import Java.User;
+import Javabean.Goods;
+import Javabean.User;
 
 public class DbOperate {
 	

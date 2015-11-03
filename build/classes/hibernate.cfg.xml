@@ -12,7 +12,7 @@
     	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
     	<property name="hbm2ddl.auto">update</property>
     	<property name="format_sql">true</property>
-    	<mapping resource="Java/Goods.hbm.xml"/>
-    	<mapping resource="Java/User.hbm.xml"/>
+    	<mapping resource="Javabean/Goods.hbm.xml"/>
+    	<mapping resource="Javabean/User.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

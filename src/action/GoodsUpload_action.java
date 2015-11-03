@@ -1,36 +1,99 @@
 package action;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-import Java.Goods;
+import DbTool.DbOperate;
+import Javabean.Goods;
 
 
 public class GoodsUpload_action extends ActionSupport {
 	
-	private Goods goods;
-	private File file;
+	private String key;
+	private String first;
+	private String max;
+	private String user_id;
 	
-	public Goods getGoods() {
-		return goods;
+	
+	
+	
+	
+	public String getKey() {
+		return key;
 	}
-	public void setGoods(Goods goods) {
-		this.goods = goods;
+
+	public void setKey(String key) {
+		this.key = key;
 	}
-	public File getFile() {
-		return file;
+
+	public String getFirst() {
+		return first;
 	}
-	public void setFile(File file) {
-		this.file = file;
+
+	public void setFirst(String first) {
+		this.first = first;
+	}
+
+	public String getMax() {
+		return max;
+	}
+
+	public void setMax(String max) {
+		this.max = max;
+	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public String page() throws Exception {
+		
+		if(first == null || max == null){
+			first = (String) ActionContext.getContext().getParameters().get("first");
+			max = (String) ActionContext.getContext().getParameters().get("max");
+		}
+		List<Goods> list = new ArrayList<Goods>();
+		DbOperate operate = new DbOperate();
+		list = operate.getGoodsByPage(new Integer(first), new Integer(max));
+		Map<String ,Object> map = ActionContext.getContext().getParameters();
+		map.put("list", list);
+		
+		return SUCCESS;
 	}
 	
-	@Override
-	public String execute() throws Exception {
+	
+	
+	public String ByKey(){
 		
+		List<Goods> list = new ArrayList<Goods>();
+		DbOperate operate = new DbOperate();
+		list = operate.getGoodsByUncertain(key, new Integer(first), new Integer(max));
+		Map<String ,Object> map = ActionContext.getContext().getParameters();
+		map.put("list", list);
 		
-		return null;
+		return SUCCESS;
+		
+	}
+	
+	public String ByUser(){
+		
+		List<Goods> list = new ArrayList<Goods>();
+		DbOperate operate = new DbOperate();
+		list = operate.getGoodsByUser(user_id);
+		Map<String ,Object> map = ActionContext.getContext().getParameters();
+		map.put("list", list);
+		
+		return SUCCESS;
+		
 	}
 	
 }

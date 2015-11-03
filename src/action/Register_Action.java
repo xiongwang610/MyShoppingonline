@@ -3,7 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 
 import DbTool.DbOperate;
-import Java.User;
+import Javabean.User;
 
 @SuppressWarnings("serial")
 public class Register_Action extends ActionSupport {

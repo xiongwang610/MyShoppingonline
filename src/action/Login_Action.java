@@ -10,7 +10,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import com.opensymphony.xwork2.ActionSupport;
 
 import DbTool.DbOperate;
-import Java.User;
+import Javabean.User;
 
 public class Login_Action extends ActionSupport implements ServletRequestAware, ServletResponseAware {
 	

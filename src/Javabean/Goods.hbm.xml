@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-10-4 20:47:18 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="Java.Goods" table="goods">
+    <class name="Javabean.Goods" table="goods">
         <id name="id" type="int">
             <generator class="increment" />
         </id>      
@@ -25,7 +25,7 @@
         </property>
         <property name="address" type="java.lang.String">
         </property>
-        <many-to-one name="user" class="Java.User" lazy="false" column="user_id" cascade="save-update" >
+        <many-to-one name="user" class="Javabean.User" lazy="false" column="user_id" cascade="save-update" >
         </many-to-one>
     </class>
 </hibernate-mapping>

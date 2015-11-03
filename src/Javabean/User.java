@@ -1,4 +1,4 @@
-package Java;
+package Javabean;
 
 public class User {
 	

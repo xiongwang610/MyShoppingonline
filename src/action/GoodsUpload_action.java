@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -56,17 +60,18 @@ public class GoodsUpload_action extends ActionSupport {
 	}
 
 	public String page() throws Exception {
-		
 		if(first == null || max == null){
-			first = (String) ActionContext.getContext().getParameters().get("first");
-			max = (String) ActionContext.getContext().getParameters().get("max");
+			
+			HttpServletRequest request = ServletActionContext.getRequest();
+			first = (String) request.getAttribute("first");
+			max = (String) request.getAttribute("max");
 		}
+		
 		List<Goods> list = new ArrayList<Goods>();
 		DbOperate operate = new DbOperate();
 		list = operate.getGoodsByPage(new Integer(first), new Integer(max));
-		Map<String ,Object> map = ActionContext.getContext().getParameters();
-		map.put("list", list);
-		
+		Map<String,Object> map = ActionContext.getContext().getSession();
+		 map.put("list", list);;
 		return SUCCESS;
 	}
 	

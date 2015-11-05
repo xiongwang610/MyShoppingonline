@@ -35,13 +35,20 @@
 			</action>
 			
 			<action name="goodspage_action" class="action.GoodsUpload_action" method="page">
-				<result name="success">/jsp/homePage.jsp</result>
+				<result name="success">homePage.jsp</result>
 			</action>
 			<action name="goodsid_action" class="action.GoodsUpload_action" method="ByKey">
 				<result name="success"></result>
 			</action>
 			<action name="goodsuser_action" class="action.GoodsUpload_action" method="ByUser">
 				<result name="success"></result>
+			</action>
+			
+			<action name="details_goods_action" class="action.Details_Action" method="getGoods">
+				<result name="success">/jsp/details_goods.jsp</result>
+			</action>
+			<action name="details_user_action" class="action.Details_Action" method="getUser">
+				<result name="success">/jsp/details_user.jsp</result>
 			</action>
 		</package>
 	</struts>

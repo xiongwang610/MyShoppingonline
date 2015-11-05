@@ -9,7 +9,7 @@
 <body>
 	
 	<div>
-		<img alt="加载中" src="/img/1.jpg">
+		<img alt="加载中" src="../img/1.jpg">
 	</div>
 </body>
 </html>

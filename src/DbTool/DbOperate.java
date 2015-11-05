@@ -173,7 +173,7 @@ public class DbOperate {
 		try{ 
 			
 			tx = session.beginTransaction();
-			Query query = session.createQuery("from Goods where user_id:=user_id");
+			Query query = session.createQuery("from Goods where user_id=:user_id");
 			query.setParameter("user_id", new Integer(user_id));
 			list = query.list();
 			tx.commit();
@@ -303,5 +303,34 @@ public class DbOperate {
 		session.close();
 	}
 	
+	
+	
+public Goods getGoodsById(String id){
+		
+		Session session = HibernateUtils.currentSession();
+		Goods goods = null;
+		Transaction tx = null;
+		
+		try{
+			
+			tx = session.beginTransaction();
+			Query query = session.createQuery("from Goods where id=:id");
+			query.setParameter("id", new Integer(id));
+			@SuppressWarnings("rawtypes")
+			List list = query.list();
+			
+			if(!list.isEmpty()){
+				goods = (Goods) list.get(0);
+				tx.commit();
+			}
+			
+		}catch (HibernateException ex){
+			if(tx != null)tx.rollback();
+			throw ex;
+		}
+		
+		session.close();
+		return goods;
+	}
 	
 }

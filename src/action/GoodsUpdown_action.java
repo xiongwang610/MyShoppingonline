@@ -147,6 +147,7 @@ public class GoodsUpdown_action extends ActionSupport{
 		
 		if(issave){
 			save();
+			System.out.println("hahahaha");
 			return SUCCESS;
 		}else return ERROR;
 		
@@ -188,6 +189,9 @@ public class GoodsUpdown_action extends ActionSupport{
 			goods.setType(type);
 			goods.setUser(new DbOperate().getUserByUserName("xiongwang"));
 			new DbOperate().save(goods);
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setAttribute("first", "0");
+			request.setAttribute("max", "10");
 		}	
 		
 		

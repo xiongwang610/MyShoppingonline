@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.* ,Javabean.Goods " %>
+    <%@ page import="java.util.* ,Javabean.Goods,Javabean.User " %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,11 +26,7 @@
 </style>
 </head>
 <body>
-	<h1>商品</h1>
-    <hr>
-  
-    <center>
-    <table width="750" height="60" cellpadding="0" cellspacing="0" border="0">
+	<table width="750" height="60" cellpadding="0" cellspacing="0" border="0">
       <tr>
         <td>
           
@@ -38,7 +34,8 @@
            <% 
                
            	   List<Goods> list = new ArrayList<Goods>();
-               list = (List<Goods>)session.getAttribute("list");
+               list = (List<Goods>)request.getAttribute("user");
+               System.out.println(list);
                if(list!=null&&list.size()>0)
                {
 	               for(int i=0;i<list.size();i++)
@@ -48,7 +45,7 @@
           <div>
              <dl>
                <dt>
-                 <a href="details_goods_action?id=<%=goods.getId()%>"><img src="../Images/<%=goods.getUrl()%>" width="120" height="90" border="1"/></a>
+                 <img src="../Images/<%=goods.getUrl()%>" width="120" height="90" border="1"/>
                </dt>
                <dd class="dd_name"><%=goods.getName() %></dd> 
                <dd class="dd_address"><%=goods.getAddress() %>&nbsp;&nbsp;价格:￥ <%=goods.getPrice() %></dd> 
@@ -63,6 +60,5 @@
         </td>
       </tr>
     </table>
-    </center>
 </body>
 </html>
